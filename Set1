@@ -1,0 +1,59 @@
+1)What happens when you type a URL in the browser? (Full flow)
+Answer:
+Browser checks cache / DNS cache.
+If not found → sends DNS query → gets IP of server.
+Browser opens a TCP connection (3-way handshake).
+Sends HTTP request to backend.
+Server processes → hits routes → controllers → services → DB → returns response.
+Browser receives HTML/JSON → renders UI.
+TCP connection closes (unless keep-alive).
+
+2️) Difference between PUT vs PATCH
+PUT → Replaces entire object.
+PATCH → Updates only specific fields.
+
+3️) What is CORS and why does it occur?
+Answer:
+CORS = Cross-Origin Resource Sharing.
+Browser blocks API calls if frontend (origin A) calls backend (origin B) without permission.
+Backend must send headers like:
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET,POST
+Occurs to protect users from malicious cross-site requests.
+
+4️) What is middleware?
+Code that runs between request and response, e.g.:
+Logging
+Auth check
+Validation
+Rate limiting
+Example in Express:
+
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
+
+5️) How do you handle errors in backend?
+Use global error handler.
+Example:
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).json({
+    message: err.message || 'Server Error'
+  });
+});
+
+6️) What is JWT?
+JWT = JSON Web Token.
+Used for authentication.
+Flow:
+User logs in → backend signs token with secret.
+Token stored in localStorage/cookie.
+User sends token in Authorization: Bearer <token>.
+Backend verifies signature → allows access.
+
+7️) Difference between Authentication vs Authorization
+
+Authentication → Are you the user? (login)
+
+Authorization → Are you allowed to access? (roles/permissions)
