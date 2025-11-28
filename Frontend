@@ -1,0 +1,33 @@
+1. What is React?
+Answer:
+React is a JavaScript library used to build fast, interactive user interfaces using components.
+
+2. What is a Component in React?
+Answer:
+A component is a reusable piece of UI.
+Types:
+Functional Component
+Class Component
+
+3. What is JSX?
+Answer:
+JSX lets you write HTML inside JavaScript.
+Example:
+return <h1>Hello</h1>;
+
+4. What is useState?
+Answer:
+A React Hook that allows your component to store and update values (state).
+Example:
+const [count, setCount] = useState(0);
+
+5. What is useEffect used for?
+Answer:
+To perform side effects like:
+API calls
+timers
+event listeners
+
+6. Difference between state and props?
+State: internal data (changes inside component)
+Props: external data (passed from parent to child
