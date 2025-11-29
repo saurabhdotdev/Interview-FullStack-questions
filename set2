@@ -1,0 +1,31 @@
+1. Why is Node.js bad at CPU-heavy tasks?
+Because Node’s event loop is single-threaded.
+If a CPU-heavy task (image processing, hashing, compression) blocks the thread, the entire server stalls until the task finishes.
+
+2. What is the “Tick Queue” in Node.js?
+
+It’s an internal queue for callbacks scheduled via process.nextTick().
+These callbacks run before the event loop continues to the next phase.
+This means they can starve the event loop if abused.
+
+3. What is the “Microtask Queue”?
+The queue where Promises (.then, .catch) are executed.
+Order of execution:
+process.nextTick()
+Microtasks (Promises)
+Regular event-loop phases (timers, I/O, etc.)
+
+4. What happens if you create a Promise that never resolves?
+
+Node won't exit.Unresolved Promises keep the event loop active, preventing process termination.
+
+5. Why is setTimeout(fn, 0) not truly zero milliseconds?
+Because it waits for the current call stack to clear all microtasks
+
+then event loop checks the timers phase
+Real delay can be 1–10 ms depending on system load.
+
+6. What is the “Zalgo Problem” in Node?
+A function may return:synchronously sometimes asynchronously other times
+This makes code unpredictable.
+Node patterns avoid this by forcing async behavior consistently.
