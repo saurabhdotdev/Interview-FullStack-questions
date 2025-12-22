@@ -1,1 +1,1 @@
-Different types Questions and Answers related to Backend Technology .
+ Different types Questions and Answers related to Backend Technology .
