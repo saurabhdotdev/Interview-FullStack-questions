@@ -1,0 +1,19 @@
+1. What is the Event Loop in Node.js, and how does it handle concurrency?
+Answer: Node.js is single-threaded but handles concurrency using the Event Loop and Libuv.
+Call Stack: Executes synchronous code.
+Node APIs/Web APIs: Handles asynchronous tasks (like fs.readFile or setTimeout) outside the main thread.
+Callback Queue: Stores callbacks from completed async tasks.
+Event Loop: Constantly checks if the Call Stack is empty. If it is, it pushes the first task from the Queue to the Stack.
+Key Concept: Heavy computation (CPU-intensive tasks) blocks the Event Loop, freezing the server. I/O tasks do not.
+
+2. What is the difference between process.nextTick() and setImmediate()?
+Answer:
+process.nextTick() fires immediately after the current operation completes, but before the Event Loop continues. It effectively "cuts the line."
+setImmediate() fires in the Check Phase of the next Event Loop iteration (after I/O callbacks).
+Use Case: Use nextTick for error handling cleanup that must happen ASAP. Use setImmediate for non-urgent background tasks.
+
+3. How do you handle "Callback Hell"?
+Answer:
+Promises: Use .then() chaining.
+Async/Await: The modern standard. Makes asynchronous code look synchronous.
+Modularization: Break huge functions into smaller, named functions.
